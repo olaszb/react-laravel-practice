@@ -47,6 +47,7 @@ input:focus {
     border: 0;
     text-decoration: none;
     padding: 15px;
+    margin-left: 5px;
     color: #FFFFFF;
     font-size: 16px;
     -webkit-transition: all 0.3 ease;
@@ -78,6 +79,7 @@ input:focus {
     color: #212121;
     transition: all 0.3s;
     border-radius: 6px;
+    margin-left: 5px;
 }
 .btn-logout:hover {
     background-color: rgba(0, 0, 0, 0.1);
