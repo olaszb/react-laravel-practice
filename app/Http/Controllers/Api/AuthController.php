@@ -29,7 +29,7 @@ class AuthController extends Controller
         if(!Auth::attempt($credentials)){
             return response([
                 'message' => 'Provided email address or password is incorrect'
-            ]);
+            ], 422);
         }
         $user = User::where('email', $credentials['email'])->first();
         $token = $user->createToken('main')->plainTextToken;
@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function logout(Request $request){
         $user = $request->user();
-        $user->currentAccessToken->delete();
+        $user->currentAccessToken()->delete();
 
         return response('', 204);
     }
