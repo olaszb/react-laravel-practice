@@ -244,3 +244,22 @@ table > tbody > tr > td {
         transform: translateY(0);
     }
 }
+
+.btn-pagination:hover:not(:disabled) {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.btn-pagination.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 5px;
+}
