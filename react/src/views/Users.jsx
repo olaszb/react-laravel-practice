@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import axiosClient from "../axios-client";
 import { Link } from "react-router-dom";
+import { useStateContext } from "../contexts/ContextProvider";
 
 export default function Users(){
     const [users, setUsers] = useState([]);
@@ -11,11 +12,24 @@ export default function Users(){
         per_page: 10,
         total: 0
     })
+    const {setNotification} = useStateContext();
 
 
     useEffect(() => {
         getUsers();
     }, [])
+
+    const onDelete = (u) => {
+        if (!window.confirm("Are you sure you want to delete this user?")){
+            return
+        }
+
+        axiosClient.delete(`/users/${u.id}`).then(()=> {
+            setNotification("User was successfully deleted!");
+            getUsers();
+        })
+
+    }
 
     const getUsers = (page = 1) => {
         setLoading(true);
@@ -103,7 +117,7 @@ export default function Users(){
                                     <td>{u.created_at}</td>
                                     <td>
                                         <Link to={'/users/'+u.id} className="btn-edit">Edit</Link>
-                                        <button className="btn-delete">Delete</button>
+                                        <button onClick={ev => onDelete(u)} className="btn-delete">Delete</button>
                                     </td>
                                 </tr>
                             ))}
